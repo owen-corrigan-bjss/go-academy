@@ -15,13 +15,24 @@ type User struct {
 	surname   string
 }
 
-func (user *User) FormatName() {
-	removeNewLine := func(str string) string {
-		return strings.Replace(str, "\n", "", -1)
-	}
+func removeNewLine(str string) string {
+	return strings.Replace(str, "\n", "", -1)
+}
 
-	user.firstName = removeNewLine(user.firstName)
-	user.surname = removeNewLine(user.surname)
+func (user *User) FirstName() string {
+	return user.firstName
+}
+
+func (user *User) Surname() string {
+	return user.surname
+}
+
+func (user *User) SetFirstName(str string) {
+	user.firstName = removeNewLine(str)
+}
+
+func (user *User) SetSurname(str string) {
+	user.surname = removeNewLine(str)
 }
 
 func inputFormatter(str string) string {
@@ -32,24 +43,27 @@ func main() {
 	cmdLineReader := bufio.NewReader(os.Stdin)
 
 	var user1 User
+	var name string
 	var err error
 
 	pl("Please input your first name")
-	user1.firstName, err = cmdLineReader.ReadString(('\n'))
+	name, err = cmdLineReader.ReadString(('\n'))
 
 	if err != nil {
 		log.Fatal("something went wrong")
 	}
+
+	user1.SetFirstName(name)
 
 	pl("please input your surname")
 
-	user1.surname, err = cmdLineReader.ReadString(('\n'))
+	name, err = cmdLineReader.ReadString(('\n'))
 
 	if err != nil {
 		log.Fatal("something went wrong")
 	}
 
-	user1.FormatName()
+	user1.SetSurname(name)
 
-	fmt.Printf("Hello %s %s nice to meet you\n", user1.firstName, user1.surname)
+	fmt.Printf("Hello %s %s nice to meet you\n", user1.FirstName(), user1.Surname())
 }
