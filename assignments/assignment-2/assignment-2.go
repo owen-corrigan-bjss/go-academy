@@ -3,9 +3,9 @@ package main
 import (
 	"bufio"
 	"fmt"
+	helpers "go-academy/helpers"
 	"log"
 	"os"
-	"strings"
 )
 
 var pl = fmt.Println
@@ -13,10 +13,6 @@ var pl = fmt.Println
 type User struct {
 	firstName string
 	surname   string
-}
-
-func removeNewLine(str string) string {
-	return strings.Replace(str, "\n", "", -1)
 }
 
 func (user *User) FirstName() string {
@@ -28,15 +24,11 @@ func (user *User) Surname() string {
 }
 
 func (user *User) SetFirstName(str string) {
-	user.firstName = removeNewLine(str)
+	user.firstName = helpers.RemoveNewlineFromStr(str)
 }
 
 func (user *User) SetSurname(str string) {
-	user.surname = removeNewLine(str)
-}
-
-func inputFormatter(str string) string {
-	return strings.Replace(str, "\n", "", 1)
+	user.surname = helpers.RemoveNewlineFromStr(str)
 }
 
 func main() {
