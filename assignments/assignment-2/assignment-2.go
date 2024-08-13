@@ -3,38 +3,17 @@ package main
 import (
 	"bufio"
 	"fmt"
-	helpers "go-academy/helpers"
+	types "go-academy/types"
 	"log"
 	"os"
 )
 
 var pl = fmt.Println
 
-type User struct {
-	firstName string
-	surname   string
-}
-
-func (user *User) FirstName() string {
-	return user.firstName
-}
-
-func (user *User) Surname() string {
-	return user.surname
-}
-
-func (user *User) SetFirstName(str string) {
-	user.firstName = helpers.RemoveNewlineFromStr(str)
-}
-
-func (user *User) SetSurname(str string) {
-	user.surname = helpers.RemoveNewlineFromStr(str)
-}
-
 func main() {
 	cmdLineReader := bufio.NewReader(os.Stdin)
 
-	var user1 User
+	var user1 types.User
 	var name string
 	var err error
 
