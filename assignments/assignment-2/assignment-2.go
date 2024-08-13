@@ -27,27 +27,26 @@ func main() {
 	cmdLineReader := bufio.NewReader(os.Stdin)
 
 	var user1 User
-	var name string
-	var err error
 
-	pl("Please input your first name")
-	name, err = cmdLineReader.ReadString(('\n'))
-
-	if err != nil {
-		log.Fatal("something went wrong")
+	for len(user1.firstName) == 0 {
+		pl("Please input your first name")
+		name, err := cmdLineReader.ReadString(('\n'))
+		if err != nil {
+			log.Fatal(err)
+		}
+		name = helpers.RemoveNewlineFromStr(name)
+		user1.SetFirstName(name)
 	}
 
-	user1.SetFirstName(name)
-
-	pl("please input your surname")
-
-	name, err = cmdLineReader.ReadString(('\n'))
-
-	if err != nil {
-		log.Fatal("something went wrong")
+	for len(user1.surname) == 0 {
+		pl("Please input your surname")
+		name, err := cmdLineReader.ReadString(('\n'))
+		if err != nil {
+			log.Fatal(err)
+		}
+		name = helpers.RemoveNewlineFromStr(name)
+		user1.SetSurname(name)
 	}
-
-	user1.SetSurname(name)
 
 	fmt.Printf("Hello %s %s nice to meet you\n", user1.firstName, user1.surname)
 }

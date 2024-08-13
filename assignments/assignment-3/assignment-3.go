@@ -23,7 +23,11 @@ func main() {
 
 	numStr = helpers.RemoveNewlineFromStr(numStr)
 
-	numInt, _ := strconv.Atoi(numStr)
+	numInt, err := strconv.Atoi(numStr)
+
+	if err != nil {
+		log.Fatal("you did something wrong")
+	}
 
 	fmt.Println(numInt)
 
