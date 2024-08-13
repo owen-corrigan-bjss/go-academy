@@ -3,10 +3,10 @@ package main
 import (
 	"bufio"
 	"fmt"
+	helpers "go-academy/helpers"
 	"log"
 	"os"
 	"strconv"
-	"strings"
 )
 
 func main() {
@@ -21,7 +21,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	numStr = strings.Replace(numStr, "\n", "", 1)
+	numStr = helpers.RemoveNewlineFromStr(numStr)
 
 	numInt, _ := strconv.Atoi(numStr)
 
