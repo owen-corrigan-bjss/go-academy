@@ -36,7 +36,7 @@ func (user *User) SetSurname(str string) {
 }
 
 func inputFormatter(str string) string {
-	return strings.Replace(str, "\n", "", -1)
+	return strings.Replace(str, "\n", "", 1)
 }
 
 func main() {
