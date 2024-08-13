@@ -1,40 +1,56 @@
 package helpers
 
 import (
-	"strings"
 	"testing"
 )
 
-func TestRemovesSingleNewlineFromStr(test *testing.T) {
-	initialString := "hello this is a string \n"
-	formatedString := RemoveNewlineFromStr(initialString)
+func TestRemoveNewlineFromStr(t *testing.T) {
 
-	if strings.Contains(formatedString, "\n") {
-		test.Error("formated string still contains \n")
-	}
-}
+	t.Run("removes single newline at end of string", func(t *testing.T) {
+		initialString := "hello this is a string\n"
+		got := RemoveNewlineFromStr(initialString)
+		want := "hello this is a string"
 
-func TestRemovesNewlineFromMiddleOfStr(test *testing.T) {
-	initialString := "hello this \n is a string"
-	formatedString := RemoveNewlineFromStr(initialString)
+		if got != want {
+			t.Fatalf("formatted string still contains \n")
+		}
+	})
+	t.Run("removes single newline in middle of string", func(t *testing.T) {
+		initialString := "hello this \nis a string"
+		got := RemoveNewlineFromStr(initialString)
+		want := "hello this is a string"
 
-	if strings.Contains(formatedString, "\n") {
-		test.Error("formated string still contains \n")
-	}
-}
+		if got != want {
+			t.Errorf("wanted %s got %s", want, got)
+		}
+	})
+	t.Run("removes two newline from string", func(t *testing.T) {
+		initialString := "hello this \nis a string\n"
+		got := RemoveNewlineFromStr(initialString)
+		want := "hello this is a string"
 
-func TestRemovesMultipleNewLinesFromStr(test *testing.T) {
-	initialString := "hello this \n is a string\n"
-	formatedString := RemoveNewlineFromStr(initialString)
+		if got != want {
+			t.Errorf("wanted %s got %s", want, got)
+		}
+	})
 
-	if strings.Contains(formatedString, "\n") {
-		test.Error("formated string still contains \n")
-	}
+	t.Run("removes two newline from string", func(t *testing.T) {
+		initialString := "hello \n\nthis \nis a string\n"
+		got := RemoveNewlineFromStr(initialString)
+		want := "hello this is a string"
 
-	initialString = "hello \n \n \nthis \n is a string\n"
-	formatedString = RemoveNewlineFromStr(initialString)
+		if got != want {
+			t.Errorf("wanted %s got %s", want, got)
+		}
+	})
 
-	if strings.Contains(formatedString, "\n") {
-		test.Error("formated string still contains \n")
-	}
+	t.Run("removes newline followed by space from string", func(t *testing.T) {
+		initialString := "hello \n\n this \nis a string\n"
+		got := RemoveNewlineFromStr(initialString)
+		want := "hello this is a string"
+
+		if got != want {
+			t.Errorf("wanted %s got %s", want, got)
+		}
+	})
 }

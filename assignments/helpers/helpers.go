@@ -1,7 +1,10 @@
 package helpers
 
-import "strings"
+import (
+	"regexp"
+)
 
 func RemoveNewlineFromStr(str string) string {
-	return strings.Replace(str, "\n", "", -1)
+	regex := regexp.MustCompile(`\n *`)
+	return regex.ReplaceAllString(str, "")
 }
